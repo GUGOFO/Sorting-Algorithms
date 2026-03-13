@@ -11,6 +11,7 @@
     height: 100vh;
     width: 20%;
     line-height: 10vh;
+    
     background-color: hsl(0, 0%, 10%);
     user-select: none;
     overflow-y: auto;
@@ -24,6 +25,11 @@
 ul{
     background-color: hsl(0, 0%, 10%);
     cursor: pointer;
+    min-height:50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 ul:hover{

@@ -14,8 +14,6 @@ function ListaDeOpções(){
             </ol>
         </div>
     )
-
-
 }
 
 export default ListaDeOpções
