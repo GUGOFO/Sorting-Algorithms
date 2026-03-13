@@ -5,16 +5,24 @@ import playImg from '../assets/TabelaDados/play.png';
 import lesmaImg from '../assets/TabelaDados/lesma.png';
 import flashImg from '../assets/TabelaDados/flash.png';
 import pauseImg from '../assets/TabelaDados/pause.png';
+import aleatorioImg from '../assets/TabelaDados/aleatorio.png';
+import metadeImg from '../assets/TabelaDados/metade.png';
 
 function TabelaDados(){
 
     const [colunas, setColunas] = useState([1,2,3,4,5,6,7,8,9,10]);
     const [novoValor, setNovoValor] = useState(1);
+    const [estaRodando, setEstaRodando] = useState(false)
 
     function mudarQuantidadeDeColunas(e) {
         const numDeColunas = Number(e.target.value);
         const novoArray = Array.from({ length: numDeColunas }, (_, i) => i + 1);
         setColunas(novoArray);
+    }
+
+    function ComecarOuTerminar(){
+        setEstaRodando(r => r === true ? false : true);
+        console.log(estaRodando)
     }
 
     return(
@@ -31,16 +39,30 @@ function TabelaDados(){
                 })}
             </div>
             <div id={Styles.botoes}>
+                <div id="divAleatorizar">
+                    <label htmlFor="btnAleatorizar" id={Styles.texto} >ALEATORIZAR</label>
+                    <div id={Styles.divbtnsPequenos}>
+                        <button id={Styles.btnPrimeiraMetade} className={`${Styles.botao} ${Styles.btnPequeno}`}>
+                            <img src={metadeImg} alt="Velocidade 1" style={{width: 24, height: 24}}/>
+                        </button>
+                        <button id="btnAleatorizar" className={`${Styles.botao} ${Styles.btnPequeno}`}>
+                            <img src={aleatorioImg} alt="Velocidade 2" style={{width: 24, height: 24}}/>
+                        </button>
+                        <button id={Styles.btnSegundaMetade} className={`${Styles.botao} ${Styles.btnPequeno}`}>
+                            <img src={metadeImg} alt="Velocidade 3" style={{width: 24, height: 24}} />
+                        </button>
+                    </div>
+                </div>
                 <div id={Styles.btnComecar}>
                     <button id={Styles.btnProximo} className={Styles.botao}>PROXIMO</button>
-                    <div id={Styles.divVelocidades}>
-                        <button id={Styles.btnLesma} className={`${Styles.botao} ${Styles.btnVelocidade}`}>
-                            <img src={lesmaImg} alt="Velocidade 1" style={{width: 24, height: 24}} />
+                    <div id={Styles.divbtnsPequenos}>
+                        <button id={Styles.btnLesma} className={`${Styles.botao} ${Styles.btnPequeno}`}>
+                            <img src={lesmaImg} alt="Velocidade 1" style={{width: 24, height: 24}}/>
                         </button>
-                        <button id={Styles.btnPause} className={`${Styles.botao} ${Styles.btnVelocidade}`}>
-                            <img src={pauseImg} alt="Velocidade 2" style={{width: 24, height: 24}} />
+                        <button id={Styles.btnPause} className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => ComecarOuTerminar()}>
+                            <img src={estaRodando === true ? pauseImg : playImg} alt="Velocidade 2" style={{width: 24, height: 24}}/>
                         </button>
-                        <button id={Styles.btnFlash} className={`${Styles.botao} ${Styles.btnVelocidade}`}>
+                        <button id={Styles.btnFlash} className={`${Styles.botao} ${Styles.btnPequeno}`}>
                             <img src={flashImg} alt="Velocidade 3" style={{width: 24, height: 24}} />
                         </button>
                     </div>

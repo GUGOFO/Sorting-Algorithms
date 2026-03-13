@@ -27,7 +27,7 @@
     align-items: end;
 
     height: 70vh;
-    width: 60vw;
+    width: 70vw;
     background-color: none;
 }
 
@@ -56,6 +56,8 @@
     cursor: pointer;
     transition: filter 0.2s, transform 0.1s;
     filter: brightness(0.7); 
+    user-select: none;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .botao:hover {
@@ -74,14 +76,14 @@
     font-weight: bold;
 }
 
-#divVelocidades {
+#divbtnsPequenos {
     display: flex;
     width: 100%;
     justify-content: space-between;
     gap: 5px; 
 }
 
-.btnVelocidade {
+.btnPequeno {
     flex: 1; 
     display: flex;
     justify-content: center;
@@ -105,7 +107,7 @@
     font-size: 16px;
     padding: 0.5rem 1rem;
     border-radius: 2rem;
-    top: -60px; 
+    top: -48px; 
     left: 50%; 
     translate: -50% 0; 
     transition: 200ms ease;
@@ -117,7 +119,7 @@
 .coluna::after{
     content: "";
     position: absolute;
-    top: -27px;
+    top: -15px;
     left: 50%;
     translate: -50% 0;
     border-top: 10px solid rgb(102, 102, 102);
@@ -190,4 +192,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+#btnPrimeiraMetade img{
+    transform: rotate(180deg);
 }
