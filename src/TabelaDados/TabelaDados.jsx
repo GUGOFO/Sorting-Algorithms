@@ -19,13 +19,14 @@ function TabelaDados(){
                     return (
                         <div className={Styles.coluna}
                             key={id}
-                            style={{"--altura" : `${(coluna/Math.max(...colunas)) * 100}%`}}>
+                            style={{"--altura" : `${(coluna/Math.max(...colunas)) * 100}%`,
+                                     "--valor" : `"${coluna}"`}}>
                         </div>
                     );
                 })}
             </div>
             <div id={Styles.DivInputColunas}>
-                <label htmlFor="inputNumDeColunas" id={Styles.texto}>COLUNAS</label>
+                <label htmlFor="inputNumDeColunas" id={Styles.texto} >COLUNAS</label>
                 <input type="range"
                        id="inputNumDeColunas"
                        className={Styles.inputNumDeColunas}
