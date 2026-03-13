@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Styles from "./TabelaDados.module.css"
 
 import playImg from '../assets/TabelaDados/play.png';
@@ -13,6 +13,7 @@ function TabelaDados(){
     const [colunas, setColunas] = useState([1,2,3,4,5,6,7,8,9,10]);
     const [novoValor, setNovoValor] = useState(1);
     const [estaRodando, setEstaRodando] = useState(false)
+    const intervaloDeTempo = Math.floor(300 / colunas.length); //Sim vai ter um numero magico por em quanto e fds akkasak, um dia tiro
 
     function mudarQuantidadeDeColunas(e) {
         const numDeColunas = Number(e.target.value);
@@ -26,20 +27,21 @@ function TabelaDados(){
     }
 
     function aleatorizar(indexInicial, indexFinal){
-        let novoArray = [...colunas], j, temp;
+        let novoArray = [...colunas];
+        let i = indexInicial;
 
-        // indexInicial = 10 ; indexFinal = 20
-        // i = 10; j = (0.5) * (20 - 10) + 10 = 15
-        // i = 11; j = (0) * (20 - 11) + 11 = 11
-        // i = 12; j = (1) * (20 - 12) + 12 = 20
-
-        for(let i = indexInicial; i < indexFinal; i++){
-            j = Math.floor(Math.random() * (indexFinal - i)) + i
-            temp = novoArray[i];
-            novoArray[i] = novoArray[j]
-            novoArray[j] = temp;
+        function passo() {
+            if (i < indexFinal) {
+                let j = Math.floor(Math.random() * (indexFinal - i)) + i;
+                let temp = novoArray[i];
+                novoArray[i] = novoArray[j];
+                novoArray[j] = temp;
+                setColunas([...novoArray]);
+                i++;
+                setTimeout(passo, intervaloDeTempo);
+            }
         }
-        setColunas(novoArray);
+        passo();
     }
 
     return(
