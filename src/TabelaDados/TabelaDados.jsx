@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import Styles from "./TabelaDados.module.css"
 
 import playImg from '../assets/TabelaDados/play.png';
@@ -13,7 +13,26 @@ function TabelaDados(){
     const [colunas, setColunas] = useState([1,2,3,4,5,6,7,8,9,10]);
     const [novoValor, setNovoValor] = useState(1);
     const [estaRodando, setEstaRodando] = useState(false)
-    const intervaloDeTempo = Math.floor(300 / colunas.length); //Sim vai ter um numero magico por em quanto e fds akkasak, um dia tiro
+    const [idCorVerde, setIdCorVerde] = useState(-1)
+    const [idCorVermelho, setIdCorVermelho] = useState(-1)
+    const intervaloDeTempo = Math.floor(3000 / colunas.length); //Sim vai ter um numero magico por em quanto e fds akkasak, um dia tiro
+
+    const ColunaItem = React.memo(({ coluna, maxColunas, cor }) => {
+        return (
+            <div className={Styles.coluna}
+                style={{
+                    "--altura" : `${(coluna / maxColunas) * 100}%`,
+                    "--valor" : `"${coluna}"`,
+                    background: cor
+                }}>
+            </div>
+        );
+    });
+    
+    function modificarCores(idVerde, idVermelho){
+        setIdCorVerde(idVerde);
+        setIdCorVermelho(idVermelho);
+    }
 
     function mudarQuantidadeDeColunas(e) {
         const numDeColunas = Number(e.target.value);
@@ -37,9 +56,12 @@ function TabelaDados(){
                 novoArray[i] = novoArray[j];
                 novoArray[j] = temp;
                 setColunas([...novoArray]);
+                console.log(idCorVerde)
+                modificarCores(i, j);
                 i++;
                 setTimeout(passo, intervaloDeTempo);
             }
+            else modificarCores(-1, -1);
         }
         passo();
     }
@@ -48,12 +70,16 @@ function TabelaDados(){
         <div id={Styles.conjuntoTabela}>
             <div id={Styles.tabela}>
                 {colunas.map((coluna, id) => { 
+                    let corAtual = "linear-gradient(135deg, hsl(0, 0%, 80%), hsl(0, 0%, 20%))";
+                    if (id === idCorVerde) corAtual = "green";
+                    else if (id === idCorVermelho) corAtual = "red";
                     return (
-                        <div className={Styles.coluna}
-                            key={id}
-                            style={{"--altura" : `${(coluna/Math.max(...colunas)) * 100}%`,
-                                     "--valor" : `"${coluna}"`}}>
-                        </div>
+                        <ColunaItem 
+                            key={id} 
+                            coluna={coluna} 
+                            maxColunas={Math.max(...colunas)} 
+                            cor={corAtual} 
+                        />
                     );
                 })}
             </div>
@@ -87,7 +113,7 @@ function TabelaDados(){
                     </div>
                 </div>
                 <div id={Styles.DivInputColunas}>
-                    <label htmlFor="inputNumDeColunas" id={Styles.texto} >COLUNAS</label>
+                    <label htmlFor="inputNumDeColunas" id={Styles.texto} onClick={() => setColunas([1,2,3,4,5,6,7,8,9,10])} >COLUNAS</label>
                     <input type="range"
                         id="inputNumDeColunas"
                         className={Styles.inputNumDeColunas}
