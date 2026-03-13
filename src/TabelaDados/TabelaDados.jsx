@@ -25,6 +25,23 @@ function TabelaDados(){
         console.log(estaRodando)
     }
 
+    function aleatorizar(indexInicial, indexFinal){
+        let novoArray = [...colunas], j, temp;
+
+        // indexInicial = 10 ; indexFinal = 20
+        // i = 10; j = (0.5) * (20 - 10) + 10 = 15
+        // i = 11; j = (0) * (20 - 11) + 11 = 11
+        // i = 12; j = (1) * (20 - 12) + 12 = 20
+
+        for(let i = indexInicial; i < indexFinal; i++){
+            j = Math.floor(Math.random() * (indexFinal - i)) + i
+            temp = novoArray[i];
+            novoArray[i] = novoArray[j]
+            novoArray[j] = temp;
+        }
+        setColunas(novoArray);
+    }
+
     return(
         <div id={Styles.conjuntoTabela}>
             <div id={Styles.tabela}>
@@ -42,14 +59,14 @@ function TabelaDados(){
                 <div id="divAleatorizar">
                     <label htmlFor="btnAleatorizar" id={Styles.texto} >ALEATORIZAR</label>
                     <div id={Styles.divbtnsPequenos}>
-                        <button id={Styles.btnPrimeiraMetade} className={`${Styles.botao} ${Styles.btnPequeno}`}>
-                            <img src={metadeImg} alt="Velocidade 1" style={{width: 24, height: 24}}/>
+                        <button id={Styles.btnPrimeiraMetade} className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => aleatorizar(0, Math.floor(colunas.length / 2))}>
+                            <img src={metadeImg} alt="Aleatorizar Primeira Metade" style={{width: 24, height: 24}}/>
                         </button>
-                        <button id="btnAleatorizar" className={`${Styles.botao} ${Styles.btnPequeno}`}>
-                            <img src={aleatorioImg} alt="Velocidade 2" style={{width: 24, height: 24}}/>
+                        <button id="btnAleatorizar" className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => aleatorizar(0, colunas.length)}>
+                            <img src={aleatorioImg} alt="Aleatorizar TUDO" style={{width: 24, height: 24}}/>
                         </button>
-                        <button id={Styles.btnSegundaMetade} className={`${Styles.botao} ${Styles.btnPequeno}`}>
-                            <img src={metadeImg} alt="Velocidade 3" style={{width: 24, height: 24}} />
+                        <button id={Styles.btnSegundaMetade} className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => aleatorizar(Math.floor(colunas.length / 2), colunas.length)}>
+                            <img src={metadeImg} alt="Aleatoizar Segunda Metade" style={{width: 24, height: 24}} />
                         </button>
                     </div>
                 </div>
