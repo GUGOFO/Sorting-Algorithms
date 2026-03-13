@@ -1,0 +1,54 @@
+#divListaDeOpcoes{
+    background-color: black;
+    color: white;
+    height: 100vh;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    line-height: 10vh;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: gray;
+    font-size: 20px;
+    overflow-y: auto;
+}
+
+#listaDeOpcoes{
+    list-style-type: lower-alpha;
+    cursor: pointer;
+    width: 100%;
+}
+
+ul{
+    background-color: hsl(0, 0%, 10%);
+}
+
+ul:hover{
+    background-color: hsl(0, 0%, 50%);
+    color: white;
+}
+
+ul:active{
+    background-color: hsl(0, 0%, 40%);
+    color: hsl(0, 0%, 90%);
+}
+
+::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: hsl(0, 0%, 10%);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(78, 73, 73); 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(56, 53, 53);   
+}
