@@ -1,11 +1,16 @@
 #paginaCompleta{
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    height: 100vh;
 }
 
 #pagina{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     width: 80%;
     height: 100%;
     background-color: black;
