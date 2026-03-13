@@ -11,16 +11,6 @@ function ListaDeOpções(){
                 <ul>SELECT SORT</ul>
                 <ul>MERGE SORT</ul>
                 <ul>QUICK SORT</ul>
-                <ul>BUSCA BINARIA</ul>
-                <ul>INSERTION SORT</ul>
-                <ul>SELECT SORT</ul>
-                <ul>MERGE SORT</ul>
-                <ul>QUICK SORT</ul>
-                <ul>BUSCA BINARIA</ul>
-                <ul>INSERTION SORT</ul>
-                <ul>SELECT SORT</ul>
-                <ul>MERGE SORT</ul>
-                <ul>QUICK SORT</ul>
             </ol>
         </div>
     )

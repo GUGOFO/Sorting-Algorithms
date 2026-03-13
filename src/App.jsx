@@ -4,7 +4,14 @@ import './App.css'
 function App() {
 
   return(
+    <div id='paginaCompleta'>
       <ListaDeOpções/>
+
+      <div id="pagina">
+        
+      </div>
+
+    </div>
   )
 }
 

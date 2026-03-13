@@ -1,0 +1,12 @@
+#paginaCompleta{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pagina{
+    width: 80%;
+    height: 100%;
+    background-color: black;
+}
