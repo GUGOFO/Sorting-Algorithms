@@ -31,6 +31,64 @@
     background-color: none;
 }
 
+#botoes{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+#btnComecar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 20vw;
+    max-width: 200px;
+    gap: 5px; 
+}
+
+.botao {
+    background: linear-gradient(180deg, hsl(0, 0%, 80%), hsl(0, 0%, 20%));
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: filter 0.2s, transform 0.1s;
+    filter: brightness(0.7); 
+}
+
+.botao:hover {
+    filter: brightness(1); 
+}
+.botao:active {
+    transform: scale(0.95);
+}
+
+#btnProximo {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: black;
+    font-weight: bold;
+}
+
+#divVelocidades {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 5px; 
+}
+
+.btnVelocidade {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 0;
+}
+
 .coluna{
     background-image: linear-gradient(135deg, hsl(0, 0%, 80%), hsl(0, 0%, 20%));
     height: var(--altura, 0px);
