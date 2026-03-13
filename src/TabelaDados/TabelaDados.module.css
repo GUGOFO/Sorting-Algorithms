@@ -1,3 +1,24 @@
+#conjuntoTabela{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#texto{
+    text-align: center;
+    user-select: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: gray;
+    transition: color 0.2s;
+}
+
+#texto:hover{
+    color: white;
+}
+
 #tabela{
     margin: 0;
     padding: 0;
@@ -14,4 +35,57 @@
     background-image: linear-gradient(135deg, hsl(0, 0%, 80%), hsl(0, 0%, 20%));
     height: var(--altura, 0px);
     width:100%;
+}
+
+.inputNumDeColunas{
+    -webkit-appearance: none;
+    -webkit-transition: 0.2s;
+    width: 20vw;
+    max-width: 200px;
+    outline: none;
+    opacity: 0.7;
+    background: linear-gradient(90deg, hsl(0, 0%, 30%), hsl(0, 0%, 70%));
+    transition: opacity 0.2s;
+    border-radius: 12px;
+}
+
+.inputNumDeColunas:hover{
+    opacity: 1;
+}
+
+.inputNumDeColunas::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 3vw;
+    height: 3vw;
+
+    min-height: 15px;
+    min-width: 15px;
+    max-width: 20px;
+    max-height: 20px;
+    
+    background-color: white;
+    border-radius: 50%;
+}
+
+.inputNumDeColunas::-moz-range-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 3vw;
+    height: 3vw;
+    
+    min-height: 15px;
+    min-width: 15px;
+    max-width: 20px;
+    max-height: 20px;
+    
+    background-color: white;
+    border-radius: 50%;
+}
+
+#DivInputColunas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
