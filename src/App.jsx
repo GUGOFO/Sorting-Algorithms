@@ -9,6 +9,7 @@ function App() {
       <ListaDeOpções/>
 
       <div id="pagina">
+        <h1 id='titulo'>NOME DO SORT</h1>
         <TabelaDados/>
       </div>
 

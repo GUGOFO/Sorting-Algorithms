@@ -15,7 +15,7 @@ function TabelaDados(){
     const [estaRodando, setEstaRodando] = useState(false)
     const [idCorVerde, setIdCorVerde] = useState(-1)
     const [idCorVermelho, setIdCorVermelho] = useState(-1)
-    const intervaloDeTempo = Math.floor(3000 / colunas.length); //Sim vai ter um numero magico por em quanto e fds akkasak, um dia tiro
+    const [intervaloDeTempo, setIntervaloDeTempo] = useState(Math.floor(300 / colunas.length)); //Sim vai ter um numero magico por em quanto e fds akkasak, um dia tiro
 
     const ColunaItem = React.memo(({ coluna, maxColunas, cor }) => {
         return (
@@ -45,6 +45,14 @@ function TabelaDados(){
         console.log(estaRodando)
     }
 
+    function desacelerar(){
+        setIntervaloDeTempo(t => t = 500);
+    }
+
+    function acelerar(){
+        setIntervaloDeTempo(t => t = 1)
+    }
+
     function aleatorizar(indexInicial, indexFinal){
         let novoArray = [...colunas];
         let i = indexInicial;
@@ -56,7 +64,6 @@ function TabelaDados(){
                 novoArray[i] = novoArray[j];
                 novoArray[j] = temp;
                 setColunas([...novoArray]);
-                console.log(idCorVerde)
                 modificarCores(i, j);
                 i++;
                 setTimeout(passo, intervaloDeTempo);
@@ -101,13 +108,13 @@ function TabelaDados(){
                 <div id={Styles.btnComecar}>
                     <button id={Styles.btnProximo} className={Styles.botao}>PROXIMO</button>
                     <div id={Styles.divbtnsPequenos}>
-                        <button id={Styles.btnLesma} className={`${Styles.botao} ${Styles.btnPequeno}`}>
+                        <button id={Styles.btnLesma} className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => desacelerar()}>
                             <img src={lesmaImg} alt="Velocidade 1" style={{width: 24, height: 24}}/>
                         </button>
                         <button id={Styles.btnPause} className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => ComecarOuTerminar()}>
                             <img src={estaRodando === true ? pauseImg : playImg} alt="Velocidade 2" style={{width: 24, height: 24}}/>
                         </button>
-                        <button id={Styles.btnFlash} className={`${Styles.botao} ${Styles.btnPequeno}`}>
+                        <button id={Styles.btnFlash} className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => acelerar()} >
                             <img src={flashImg} alt="Velocidade 3" style={{width: 24, height: 24}} />
                         </button>
                     </div>
