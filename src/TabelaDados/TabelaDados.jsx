@@ -41,8 +41,7 @@ function TabelaDados(){
     }
 
     function ComecarOuTerminar(){
-        setEstaRodando(r => r === true ? false : true);
-        console.log(estaRodando)
+        setEstaRodando(!estaRodando)
     }
 
     function desacelerar(){
