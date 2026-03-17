@@ -16,7 +16,7 @@ function TabelaDados(){
     const [estaRodando, setEstaRodando] = useState(false)
     const [idCorVerde, setIdCorVerde] = useState(-1)
     const [idCorVermelho, setIdCorVermelho] = useState(-1)
-    const [intervaloDeTempo, setIntervaloDeTempo] = useState(Math.floor(300 / colunas.length)); //Sim vai ter um numero magico por em quanto e fds akkasak, um dia tiro
+    const intervaloDeTempoRef = useRef(Math.floor(300 / colunas.length));
 
     const ColunaItem = React.memo(({ coluna, maxColunas, cor }) => {
         return (
@@ -42,20 +42,20 @@ function TabelaDados(){
     }
 
     function ComecarOuTerminar(){
-        setEstaRodando(!estaRodando)
     }
 
     function desacelerar(){
-        setIntervaloDeTempo(t => t = 500);
+        intervaloDeTempoRef.current = 500; 
     }
 
     function acelerar(){
-        setIntervaloDeTempo(t => t = 1)
+        intervaloDeTempoRef.current = 10; 
     }
 
     function aleatorizar(indexInicial, indexFinal){
         let novoArray = [...colunas];
         let i = indexInicial;
+        setEstaRodando(true)
 
         function passo() {
             if (i < indexFinal) {
@@ -66,9 +66,12 @@ function TabelaDados(){
                 setColunas([...novoArray]);
                 modificarCores(i, j);
                 i++;
-                setTimeout(passo, intervaloDeTempo);
+                setTimeout(passo, intervaloDeTempoRef.current);
             }
-            else modificarCores(-1, -1);
+            else {
+                modificarCores(-1, -1);
+                setEstaRodando(false)
+            }
         }
         passo();
     }
@@ -99,16 +102,19 @@ function TabelaDados(){
                                     btnFuncao={() => aleatorizar(0, Math.floor(colunas.length / 2))}
                                     btnImagem={metadeImg} 
                                     btnAlt={"Aleatorizar Primeira Metade"}
+                                    btnRodando={estaRodando}
                         />
                         <BtnPequeno btnId="btnAleatorizar"
                                     btnFuncao={() => aleatorizar(0, colunas.length)}
                                     btnImagem={aleatorioImg} 
                                     btnAlt={"Aleatorizar TUDO"}
+                                    btnRodando={estaRodando}
                         />
                         <BtnPequeno btnId={Styles.btnSegundaMetade}
                                     btnFuncao={() => aleatorizar(Math.floor(colunas.length / 2), colunas.length)}
                                     btnImagem={metadeImg} 
                                     btnAlt={"Aleatoizar Segunda Metade"}
+                                    btnRodando={estaRodando}
                         />
 
                     </div>
@@ -121,16 +127,19 @@ function TabelaDados(){
                                     btnFuncao={() => desacelerar()}
                                     btnImagem={lesmaImg} 
                                     btnAlt={"Velocidade 1"}
+                                    btnRodando={estaRodando}
                         />
                         <BtnPequeno btnId={Styles.btnPause}
                                     btnFuncao={() => ComecarOuTerminar()}
                                     btnImagem={estaRodando === true ? pauseImg : playImg} 
                                     btnAlt={"Velocidade 2"}
+                                    btnRodando={estaRodando}
                         />
                         <BtnPequeno btnId={Styles.btnFlash}
                                     btnFuncao={() => acelerar()}
                                     btnImagem={flashImg} 
                                     btnAlt={"Velocidade 3"}
+                                    btnRodando={estaRodando}
                         />
                         
                     </div>
@@ -142,7 +151,8 @@ function TabelaDados(){
                         className={Styles.inputNumDeColunas}
                         min={10} max={200}
                         value={colunas.length} 
-                        onChange={(e) => mudarQuantidadeDeColunas(e)}/>
+                        onChange={(e) => mudarQuantidadeDeColunas(e)}
+                        disabled={estaRodando}/>
                 </div>
             </div>
         </div>

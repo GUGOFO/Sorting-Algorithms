@@ -68,6 +68,11 @@
     transform: scale(0.95);
 }
 
+.botao:disabled {
+    opacity: 0.3; 
+    cursor: auto;
+}
+
 #btnProximo {
     width: 100%;
     padding: 12px;
@@ -186,6 +191,10 @@
     
     background-color: white;
     border-radius: 50%;
+}
+
+.inputNumDeColunas:disabled{
+    opacity: 0.5;
 }
 
 #DivInputColunas{
