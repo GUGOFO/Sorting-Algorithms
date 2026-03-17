@@ -55,7 +55,7 @@
     font-weight: bold;
     border-radius: 8px; 
     cursor: pointer;
-    transition: filter 0.2s, transform 0.1s;
+    transition: filter 0.2s, transform 0.1s, opacity 0.2s;
     filter: brightness(0.7); 
     user-select: none;
     font-family: Arial, Helvetica, sans-serif;
