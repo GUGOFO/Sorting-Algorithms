@@ -94,32 +94,45 @@ function TabelaDados(){
                 <div id="divAleatorizar">
                     <label htmlFor="btnAleatorizar" id={Styles.texto} >ALEATORIZAR</label>
                     <div id={Styles.divbtnsPequenos}>
-                        <button id={Styles.btnPrimeiraMetade} className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => aleatorizar(0, Math.floor(colunas.length / 2))}>
-                            <img src={metadeImg} alt="Aleatorizar Primeira Metade" style={{width: 24, height: 24}}/>
-                        </button>
 
-                        <BtnPequeno btnId={Styles.btnPrimeiraMetade} btnFuncao={() => aleatorizar(0, Math.floor(colunas.length / 2))} btnImagem={metadeImg} btnAlt={"Aleatorizar Primeira Metade"}/>
+                        <BtnPequeno btnId={Styles.btnPrimeiraMetade}
+                                    btnFuncao={() => aleatorizar(0, Math.floor(colunas.length / 2))}
+                                    btnImagem={metadeImg} 
+                                    btnAlt={"Aleatorizar Primeira Metade"}
+                        />
+                        <BtnPequeno btnId="btnAleatorizar"
+                                    btnFuncao={() => aleatorizar(0, colunas.length)}
+                                    btnImagem={aleatorioImg} 
+                                    btnAlt={"Aleatorizar TUDO"}
+                        />
+                        <BtnPequeno btnId={Styles.btnSegundaMetade}
+                                    btnFuncao={() => aleatorizar(Math.floor(colunas.length / 2), colunas.length)}
+                                    btnImagem={metadeImg} 
+                                    btnAlt={"Aleatoizar Segunda Metade"}
+                        />
 
-                        <button id="btnAleatorizar" className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => aleatorizar(0, colunas.length)}>
-                            <img src={aleatorioImg} alt="Aleatorizar TUDO" style={{width: 24, height: 24}}/>
-                        </button>
-                        <button id={Styles.btnSegundaMetade} className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => aleatorizar(Math.floor(colunas.length / 2), colunas.length)}>
-                            <img src={metadeImg} alt="Aleatoizar Segunda Metade" style={{width: 24, height: 24}} />
-                        </button>
                     </div>
                 </div>
                 <div id={Styles.btnComecar}>
                     <button id={Styles.btnProximo} className={Styles.botao}>PROXIMO</button>
                     <div id={Styles.divbtnsPequenos}>
-                        <button id={Styles.btnLesma} className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => desacelerar()}>
-                            <img src={lesmaImg} alt="Velocidade 1" style={{width: 24, height: 24}}/>
-                        </button>
-                        <button id={Styles.btnPause} className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => ComecarOuTerminar()}>
-                            <img src={estaRodando === true ? pauseImg : playImg} alt="Velocidade 2" style={{width: 24, height: 24}}/>
-                        </button>
-                        <button id={Styles.btnFlash} className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => acelerar()} >
-                            <img src={flashImg} alt="Velocidade 3" style={{width: 24, height: 24}} />
-                        </button>
+
+                        <BtnPequeno btnId={Styles.btnLesma}
+                                    btnFuncao={() => desacelerar()}
+                                    btnImagem={lesmaImg} 
+                                    btnAlt={"Velocidade 1"}
+                        />
+                        <BtnPequeno btnId={Styles.btnPause}
+                                    btnFuncao={() => ComecarOuTerminar()}
+                                    btnImagem={estaRodando === true ? pauseImg : playImg} 
+                                    btnAlt={"Velocidade 2"}
+                        />
+                        <BtnPequeno btnId={Styles.btnFlash}
+                                    btnFuncao={() => acelerar()}
+                                    btnImagem={flashImg} 
+                                    btnAlt={"Velocidade 3"}
+                        />
+                        
                     </div>
                 </div>
                 <div id={Styles.DivInputColunas}>
