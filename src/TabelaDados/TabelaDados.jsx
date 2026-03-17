@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import Styles from "./TabelaDados.module.css"
+import BtnPequeno from "./btnPequeno";
 
 import playImg from '../assets/TabelaDados/play.png';
 import lesmaImg from '../assets/TabelaDados/lesma.png';
@@ -96,6 +97,9 @@ function TabelaDados(){
                         <button id={Styles.btnPrimeiraMetade} className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => aleatorizar(0, Math.floor(colunas.length / 2))}>
                             <img src={metadeImg} alt="Aleatorizar Primeira Metade" style={{width: 24, height: 24}}/>
                         </button>
+
+                        <BtnPequeno btnId={Styles.btnPrimeiraMetade} btnFuncao={() => aleatorizar(0, Math.floor(colunas.length / 2))} btnImagem={metadeImg} btnAlt={"Aleatorizar Primeira Metade"}/>
+
                         <button id="btnAleatorizar" className={`${Styles.botao} ${Styles.btnPequeno}`} onClick={() => aleatorizar(0, colunas.length)}>
                             <img src={aleatorioImg} alt="Aleatorizar TUDO" style={{width: 24, height: 24}}/>
                         </button>
