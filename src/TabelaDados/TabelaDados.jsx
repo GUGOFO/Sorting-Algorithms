@@ -109,6 +109,32 @@ function TabelaDados(){
         tudoCorreto();
     }
 
+    async function selectSort(){
+        let colunasAtualizadas = [...colunas];
+        const tamanhoColunas = colunasAtualizadas.length;
+        setEstaRodando(true)
+
+        for(let i = 0; i < tamanhoColunas; i++){
+            let min = i;
+            for(let j = i + 1; j < tamanhoColunas; j++) {
+                if(colunasAtualizadas[j] < colunasAtualizadas[min]) min = j;
+                setColunas([...colunasAtualizadas]);
+                modificarCores(min, j);
+                await new Promise(resolve => setTimeout(resolve, intervaloDeTempoRef.current));
+            }
+            const temp = colunasAtualizadas[i];
+            colunasAtualizadas[i] = colunasAtualizadas[min];
+            colunasAtualizadas[min] = temp;
+            setColunas([...colunasAtualizadas]);
+        }
+        
+        setEstaRodando(false)
+        tudoCorreto();
+    }
+
+    async function merge(){
+
+    }
 
     return(
         <div id={Styles.conjuntoTabela}>
@@ -164,7 +190,7 @@ function TabelaDados(){
                                     btnRodando={estaRodando}
                         />
                         <BtnPequeno btnId={Styles.btnPause}
-                                    btnFuncao={() => insertionSort()}
+                                    btnFuncao={() => selectSort()}
                                     btnImagem={estaRodando === true ? pauseImg : playImg} 
                                     btnAlt={"Velocidade 2"}
                                     btnRodando={estaRodando}
