@@ -22,7 +22,7 @@
     width: 100%;
 }
 
-ul{
+li{
     background-color: hsl(0, 0%, 10%);
     cursor: pointer;
     min-height:50px;
@@ -32,12 +32,12 @@ ul{
     align-items: center;
 }
 
-ul:hover{
+li:hover{
     background-color: hsl(0, 0%, 50%);
     color: white;
 }
 
-ul:active{
+li:active{
     background-color: hsl(0, 0%, 40%);
     color: hsl(0, 0%, 90%);
 }

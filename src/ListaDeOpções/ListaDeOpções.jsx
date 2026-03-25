@@ -1,16 +1,16 @@
-
 import Styles from "./ListaDeOpções.module.css"
 
-function ListaDeOpções(){
+function ListaDeOpções({setAlgoritmo}){
+
 
     return(
         <div id={Styles.divListaDeOpcoes}>
             <ol id={Styles.listaDeOpcoes}>
-                <ul>BUSCA BINARIA</ul>
-                <ul>INSERTION SORT</ul>
-                <ul>SELECT SORT</ul>
-                <ul>MERGE SORT</ul>
-                <ul>QUICK SORT</ul>
+                <li onClick={() => setAlgoritmo("Busca Binaria")}>BUSCA BINARIA</li>
+                <li onClick={() => setAlgoritmo("Insertion Sort")}>INSERTION SORT</li>
+                <li onClick={() => setAlgoritmo("Select Sort")}>SELECT SORT</li>
+                <li onClick={() => setAlgoritmo("Merge Sort")}>MERGE SORT</li>
+                <li onClick={() => setAlgoritmo("Quick Sort")}>QUICK SORT</li>
             </ol>
         </div>
     )

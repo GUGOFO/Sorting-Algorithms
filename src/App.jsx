@@ -9,7 +9,7 @@ function App() {
 
   return(
     <div id='paginaCompleta'>
-      <ListaDeOpções/>
+      <ListaDeOpções setAlgoritmo={setAlgoritmo}/>
 
       <div id="pagina">
         <h1 id='titulo' >{algoritmo}</h1>
