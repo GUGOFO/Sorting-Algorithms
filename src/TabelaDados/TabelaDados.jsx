@@ -76,25 +76,27 @@ function TabelaDados(){
         passo();
     }
 
-    function insertionSort(){
-        colunas.forEach((coluna, index) => {
-            let x = coluna
-            let i = index - 1;
-            while(i >= 0 && colunas[i] > x){
-                setColunas(c => [
-                    ...c.slice(0, i + 1),
-                    colunas[i],
-                    ...c.slice(i + 2)
-                ])
+    async function insertionSort() {
+
+        let colunasAtualizadas = [...colunas]; 
+        setEstaRodando(true)
+        
+        for(let j = 1; j < colunasAtualizadas.length; j++){
+            const x = colunasAtualizadas[j];
+            let i = j - 1;
+            
+            while(i >= 0 && colunasAtualizadas[i] > x){
+                colunasAtualizadas[i + 1] = colunasAtualizadas[i];
+                setColunas([...colunasAtualizadas]); 
+                await new Promise(resolve => setTimeout(resolve, intervaloDeTempoRef.current)); 
                 i--;
             }
-            setColunas(c => [
-                ...c.slice(0, i + 1),
-                x,
-                ...c.slice(i + 2)
-            ])
-        })
+            colunasAtualizadas[i + 1] = x;
+            setColunas([...colunasAtualizadas]);
+        }
+        setEstaRodando(false)
     }
+
 
     return(
         <div id={Styles.conjuntoTabela}>
