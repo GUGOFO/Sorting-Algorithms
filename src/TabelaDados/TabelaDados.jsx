@@ -76,6 +76,26 @@ function TabelaDados(){
         passo();
     }
 
+    function insertionSort(){
+        colunas.forEach((coluna, index) => {
+            let x = coluna
+            let i = index - 1;
+            while(i >= 0 && colunas[i] > x){
+                setColunas(c => [
+                    ...c.slice(0, i + 1),
+                    colunas[i],
+                    ...c.slice(i + 2)
+                ])
+                i--;
+            }
+            setColunas(c => [
+                ...c.slice(0, i + 1),
+                x,
+                ...c.slice(i + 2)
+            ])
+        })
+    }
+
     return(
         <div id={Styles.conjuntoTabela}>
             <div id={Styles.tabela}>
@@ -130,7 +150,7 @@ function TabelaDados(){
                                     btnRodando={estaRodando}
                         />
                         <BtnPequeno btnId={Styles.btnPause}
-                                    btnFuncao={() => ComecarOuTerminar()}
+                                    btnFuncao={() => insertionSort()}
                                     btnImagem={estaRodando === true ? pauseImg : playImg} 
                                     btnAlt={"Velocidade 2"}
                                     btnRodando={estaRodando}
