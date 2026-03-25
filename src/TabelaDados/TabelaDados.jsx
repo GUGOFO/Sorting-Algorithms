@@ -84,10 +84,12 @@ function TabelaDados(){
         for(let j = 1; j < colunasAtualizadas.length; j++){
             const x = colunasAtualizadas[j];
             let i = j - 1;
+            modificarCores(j, i);
             
             while(i >= 0 && colunasAtualizadas[i] > x){
                 colunasAtualizadas[i + 1] = colunasAtualizadas[i];
                 setColunas([...colunasAtualizadas]); 
+                modificarCores(i, i - 1);
                 await new Promise(resolve => setTimeout(resolve, intervaloDeTempoRef.current)); 
                 i--;
             }
@@ -95,6 +97,7 @@ function TabelaDados(){
             setColunas([...colunasAtualizadas]);
         }
         setEstaRodando(false)
+        modificarCores(-1, -1);
     }
 
 
