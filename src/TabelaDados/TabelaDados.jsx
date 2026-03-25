@@ -76,28 +76,37 @@ function TabelaDados(){
         passo();
     }
 
+    async function tudoCorreto(){
+        let colunasAtualizadas = [...colunas]; 
+
+        for(let i = 0; i < colunas.length; i++){
+            modificarCores(i, -1);
+            await new Promise(resolve => setTimeout(resolve, 10)); 
+        }
+        modificarCores(-1, -1);
+    }
+
     async function insertionSort() {
 
         let colunasAtualizadas = [...colunas]; 
         setEstaRodando(true)
-        
+
         for(let j = 1; j < colunasAtualizadas.length; j++){
             const x = colunasAtualizadas[j];
             let i = j - 1;
-            modificarCores(j, i);
             
             while(i >= 0 && colunasAtualizadas[i] > x){
+                let temp = colunasAtualizadas[i + 1]
                 colunasAtualizadas[i + 1] = colunasAtualizadas[i];
+                colunasAtualizadas[i] = temp;
                 setColunas([...colunasAtualizadas]); 
-                modificarCores(i, i - 1);
+                modificarCores(i,i + 1);
                 await new Promise(resolve => setTimeout(resolve, intervaloDeTempoRef.current)); 
                 i--;
             }
-            colunasAtualizadas[i + 1] = x;
-            setColunas([...colunasAtualizadas]);
         }
         setEstaRodando(false)
-        modificarCores(-1, -1);
+        tudoCorreto();
     }
 
 
