@@ -133,23 +133,31 @@ function TabelaDados(){
     }
 
     async function mergeSort(){
-
         let colunasAtualizadas = [...colunas];
         const tamanhoColunas = colunasAtualizadas.length - 1;
-        setEstaRodando(true)        
+        setEstaRodando(true);        
 
         async function intercala(e, m, d){
-            let i = e; let j = m + 1; let k = 0;
-            let vetorTemporario = [];
-            while(i <= m && j <= d){
-                if(colunasAtualizadas[i] < colunasAtualizadas[j]) vetorTemporario[k++] = colunasAtualizadas[i++]
-                else vetorTemporario[k++] = colunasAtualizadas[j++]
+            let i = e;
+            let j = m + 1;
+
+            while (i <= m && j <= d) {
+                if (colunasAtualizadas[i] <= colunasAtualizadas[j]) {
+                    i++;
+                } else {
+                    let valor = colunasAtualizadas[j];
+                    let index = j;
+                    while (index !== i) {
+                        colunasAtualizadas[index] = colunasAtualizadas[index - 1];
+                        index--;
+                    }
+                    colunasAtualizadas[i] = valor;
+                    modificarCores(i, j); 
+                    setColunas([...colunasAtualizadas]);
+                    await new Promise(resolve => setTimeout(resolve, intervaloDeTempoRef.current));
+                    i++; m++; j++;
+                }
             }
-            while(i <= m) vetorTemporario[k++] = colunasAtualizadas[i++]
-            while(j <= d) vetorTemporario[k++] = colunasAtualizadas[j++]
-            for(i = e, k = 0; i <= d; i++, k++) colunasAtualizadas[i] = vetorTemporario[k];
-            await new Promise(resolve => setTimeout(resolve, intervaloDeTempoRef.current));
-            setColunas([...colunasAtualizadas]);
         }
 
         async function merge(e, d){
@@ -162,6 +170,7 @@ function TabelaDados(){
         }
 
         await merge(0, tamanhoColunas)
+        modificarCores(-1, -1);
         setEstaRodando(false)
     }
 
