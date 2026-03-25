@@ -132,8 +132,37 @@ function TabelaDados(){
         tudoCorreto();
     }
 
-    async function merge(){
+    async function mergeSort(){
 
+        let colunasAtualizadas = [...colunas];
+        const tamanhoColunas = colunasAtualizadas.length - 1;
+        setEstaRodando(true)        
+
+        async function intercala(e, m, d){
+            let i = e; let j = m + 1; let k = 0;
+            let vetorTemporario = [];
+            while(i <= m && j <= d){
+                if(colunasAtualizadas[i] < colunasAtualizadas[j]) vetorTemporario[k++] = colunasAtualizadas[i++]
+                else vetorTemporario[k++] = colunasAtualizadas[j++]
+            }
+            while(i <= m) vetorTemporario[k++] = colunasAtualizadas[i++]
+            while(j <= d) vetorTemporario[k++] = colunasAtualizadas[j++]
+            for(i = e, k = 0; i <= d; i++, k++) colunasAtualizadas[i] = vetorTemporario[k];
+            await new Promise(resolve => setTimeout(resolve, intervaloDeTempoRef.current));
+            setColunas([...colunasAtualizadas]);
+        }
+
+        async function merge(e, d){
+            if(e < d){
+                let m = Math.floor((e + d) / 2);
+                await merge(e,m);
+                await merge(m + 1, d);
+                await intercala(e, m, d)
+            }
+        }
+
+        await merge(0, tamanhoColunas)
+        setEstaRodando(false)
     }
 
     return(
@@ -190,7 +219,7 @@ function TabelaDados(){
                                     btnRodando={estaRodando}
                         />
                         <BtnPequeno btnId={Styles.btnPause}
-                                    btnFuncao={() => selectSort()}
+                                    btnFuncao={() => mergeSort()}
                                     btnImagem={estaRodando === true ? pauseImg : playImg} 
                                     btnAlt={"Velocidade 2"}
                                     btnRodando={estaRodando}
