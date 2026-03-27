@@ -12,11 +12,10 @@ import metadeImg from '../assets/TabelaDados/metade.png';
 function TabelaDados(){
 
     const [colunas, setColunas] = useState([1,2,3,4,5,6,7,8,9,10]);
-    const [novoValor, setNovoValor] = useState(1);
     const [estaRodando, setEstaRodando] = useState(false)
     const [idCorVerde, setIdCorVerde] = useState(-1)
     const [idCorVermelho, setIdCorVermelho] = useState(-1)
-    const intervaloDeTempoRef = useRef(Math.floor(300 / colunas.length));
+    const intervaloDeTempoRef = useRef((15/colunas.length) * 100);
 
     const ColunaItem = React.memo(({ coluna, maxColunas, cor }) => {
         return (
@@ -45,11 +44,11 @@ function TabelaDados(){
     }
 
     function desacelerar(){
-        intervaloDeTempoRef.current = 500; 
+        intervaloDeTempoRef.current = (90/colunas.length) * 100; 
     }
 
     function acelerar(){
-        intervaloDeTempoRef.current = 10; 
+        intervaloDeTempoRef.current = (2/colunas.length) * 100; 
     }
 
     function aleatorizar(indexInicial, indexFinal){
