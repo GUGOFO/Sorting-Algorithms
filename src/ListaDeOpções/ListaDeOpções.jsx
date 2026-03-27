@@ -10,6 +10,7 @@ function ListaDeOpções({setAlgoritmo}){
                 <li onClick={() => setAlgoritmo("Select Sort")}>SELECT SORT</li>
                 <li onClick={() => setAlgoritmo("Merge Sort")}>MERGE SORT</li>
                 <li onClick={() => setAlgoritmo("Thanos Sort")}>THANOS SORT</li>
+                <li onClick={() => setAlgoritmo("Random Sort")}>RANDOM SORT</li>
             </ol>
         </div>
     )

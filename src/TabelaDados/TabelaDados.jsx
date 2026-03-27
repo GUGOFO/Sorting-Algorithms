@@ -55,6 +55,9 @@ function TabelaDados({algoritmoUsado}){
             case algoritmoUsado === "Thanos Sort":
                 thanosSort();
                 break;
+            case algoritmoUsado === "Random Sort":
+                randomSort();
+                break;
             default:
                 console.log("fodeu")
                 break;
@@ -232,6 +235,25 @@ function TabelaDados({algoritmoUsado}){
         setEstaRodando(false)
     }
 
+    async function randomSort(){
+        setEstaRodando(true)
+        let colunasAtualizadas = [...colunas];
+
+        while(!ordemCorreta(colunasAtualizadas)){
+            const tamanho = colunasAtualizadas.length;
+            for(let i = 0; i < tamanho; i++){
+                let j = Math.floor(Math.random() * (tamanho - i)) + i;
+                const temp = colunasAtualizadas[i];
+                colunasAtualizadas[i] = colunasAtualizadas[j];
+                colunasAtualizadas[j] = temp;
+            }
+            setColunas([...colunasAtualizadas]);
+            await new Promise(resolve => setTimeout(resolve, 1)); 
+        }
+
+        setEstaRodando(false)
+        tudoCorreto()
+    }
 
     return(
         <div id={Styles.conjuntoTabela}>
