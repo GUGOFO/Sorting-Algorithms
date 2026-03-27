@@ -43,6 +43,8 @@ function TabelaDados(){
     function ComecarOuTerminar(){
     }
 
+    //Arrumar o bug de velocidade so mudar quando voce clicar affs
+
     function desacelerar(){
         intervaloDeTempoRef.current = (90/colunas.length) * 100; 
     }
