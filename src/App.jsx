@@ -13,7 +13,7 @@ function App() {
 
       <div id="pagina">
         <h1 id='titulo' >{algoritmo}</h1>
-        <TabelaDados/>
+        <TabelaDados algoritmoUsado={algoritmo}/>
       </div>
 
     </div>

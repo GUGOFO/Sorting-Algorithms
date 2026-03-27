@@ -9,7 +9,7 @@ import pauseImg from '../assets/TabelaDados/pause.png';
 import aleatorioImg from '../assets/TabelaDados/aleatorio.png';
 import metadeImg from '../assets/TabelaDados/metade.png';
 
-function TabelaDados(){
+function TabelaDados({algoritmoUsado}){
 
     const [colunas, setColunas] = useState([1,2,3,4,5,6,7,8,9,10]);
     const [estaRodando, setEstaRodando] = useState(false)
@@ -40,7 +40,25 @@ function TabelaDados(){
         setColunas(novoArray);
     }
 
-    function ComecarOuTerminar(){
+    function rodarSorting(){
+        switch (true){
+            case algoritmoUsado === "Insertion Sort":
+                insertionSort();
+                break;
+            case algoritmoUsado === "Select Sort":
+                selectSort();
+                break;
+            case algoritmoUsado === "Merge Sort":
+                mergeSort();
+                break;
+            case algoritmoUsado === "Thanos Sort":
+                thanosSort();
+                break;
+            default:
+                console.log("fodeu")
+                break;
+        }
+        console.log(algoritmoUsado)
     }
 
     //Arrumar o bug de velocidade so mudar quando voce clicar affs
@@ -78,11 +96,13 @@ function TabelaDados(){
     }
 
     async function tudoCorreto(){
+        setEstaRodando(true)
         for(let i = 0; i < colunas.length; i++){
             modificarCores(i, -1);
             await new Promise(resolve => setTimeout(resolve, (15/colunas.length) * 100)); 
         }
         modificarCores(-1, -1);
+        setEstaRodando(false)
     }
 
     function ordemCorreta(vetor){
@@ -207,6 +227,7 @@ function TabelaDados(){
         setEstaRodando(false)
     }
 
+
     return(
         <div id={Styles.conjuntoTabela}>
             <div id={Styles.tabela}>
@@ -261,7 +282,7 @@ function TabelaDados(){
                                     btnRodando={estaRodando}
                         />
                         <BtnPequeno btnId={Styles.btnPause}
-                                    btnFuncao={() => thanosSort()}
+                                    btnFuncao={() => rodarSorting()}
                                     btnImagem={estaRodando === true ? pauseImg : playImg} 
                                     btnAlt={"Velocidade 2"}
                                     btnRodando={estaRodando}
