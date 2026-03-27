@@ -8,6 +8,7 @@ import flashImg from '../assets/TabelaDados/flash.png';
 import pauseImg from '../assets/TabelaDados/pause.png';
 import aleatorioImg from '../assets/TabelaDados/aleatorio.png';
 import metadeImg from '../assets/TabelaDados/metade.png';
+import pessoaAndando from '../assets/TabelaDados/pessoaAndando.png';
 
 function TabelaDados({algoritmoUsado}){
 
@@ -69,6 +70,10 @@ function TabelaDados({algoritmoUsado}){
 
     function acelerar(){
         intervaloDeTempoRef.current = (2/colunas.length) * 100; 
+    }
+
+    function velocidadeMedia(){
+        intervaloDeTempoRef.current = (15/colunas.length) * 100;
     }
 
     function aleatorizar(indexInicial, indexFinal){
@@ -272,7 +277,11 @@ function TabelaDados({algoritmoUsado}){
                     </div>
                 </div>
                 <div id={Styles.btnComecar}>
-                    <button id={Styles.btnProximo} className={Styles.botao}>PROXIMO</button>
+                    <button id={Styles.btnProximo} className={Styles.botao} onClick={() => rodarSorting()} disabled={estaRodando}>
+                        <img src={estaRodando === true ? pauseImg : playImg} 
+                             alt={"Ativar"} 
+                             style={{width: 24, height: 24}}/>
+                    </button>
                     <div id={Styles.divbtnsPequenos}>
 
                         <BtnPequeno btnId={Styles.btnLesma}
@@ -282,8 +291,8 @@ function TabelaDados({algoritmoUsado}){
                                     btnRodando={estaRodando}
                         />
                         <BtnPequeno btnId={Styles.btnPause}
-                                    btnFuncao={() => rodarSorting()}
-                                    btnImagem={estaRodando === true ? pauseImg : playImg} 
+                                    btnFuncao={() => velocidadeMedia()}
+                                    btnImagem={pessoaAndando} 
                                     btnAlt={"Velocidade 2"}
                                     btnRodando={estaRodando}
                         />
