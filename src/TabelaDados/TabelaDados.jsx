@@ -77,11 +77,9 @@ function TabelaDados(){
     }
 
     async function tudoCorreto(){
-        let colunasAtualizadas = [...colunas]; 
-
         for(let i = 0; i < colunas.length; i++){
             modificarCores(i, -1);
-            await new Promise(resolve => setTimeout(resolve, 10)); 
+            await new Promise(resolve => setTimeout(resolve, (15/colunas.length) * 100)); 
         }
         modificarCores(-1, -1);
     }
@@ -185,7 +183,8 @@ function TabelaDados(){
 
     async function thanosSort(){
         let colunasAtualizadas = [...colunas];
-
+        setEstaRodando(true)
+        
         while(!ordemCorreta(colunasAtualizadas)){
             const metadeDoVetor = Math.floor(colunasAtualizadas.length / 2);
             
@@ -197,7 +196,14 @@ function TabelaDados(){
             setColunas([...colunasAtualizadas])
             await new Promise(resolve => setTimeout(resolve, 1000));
         }
-        tudoCorreto()
+        setColunas([...colunasAtualizadas])
+        
+        for(let i = 0; i < colunasAtualizadas.length; i++){
+            modificarCores(i, -1);
+            await new Promise(resolve => setTimeout(resolve, (15/colunasAtualizadas.length) * 100)); 
+        }
+        modificarCores(-1, -1);
+        setEstaRodando(false)
     }
 
     return(
