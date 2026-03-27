@@ -86,6 +86,12 @@ function TabelaDados(){
         modificarCores(-1, -1);
     }
 
+    function verificar(vetor){
+        for(let i = 0; i < vetor.length - 1; i++)
+            if(vetor[i] > vetor[i + 1]) return false;
+        return true
+    }
+
     async function insertionSort() {
 
         let colunasAtualizadas = [...colunas]; 
@@ -171,7 +177,13 @@ function TabelaDados(){
 
         await merge(0, tamanhoColunas)
         modificarCores(-1, -1);
+        tudoCorreto()
         setEstaRodando(false)
+    }
+
+    async function thanosSort(){
+        let colunasAtualizadas = [...colunas];
+
     }
 
     return(
