@@ -86,7 +86,9 @@ function TabelaDados(){
         modificarCores(-1, -1);
     }
 
-    function verificar(vetor){
+    function ordemCorreta(vetor){
+        if(vetor.length <= 1) return true;
+
         for(let i = 0; i < vetor.length - 1; i++)
             if(vetor[i] > vetor[i + 1]) return false;
         return true
@@ -184,6 +186,18 @@ function TabelaDados(){
     async function thanosSort(){
         let colunasAtualizadas = [...colunas];
 
+        while(!ordemCorreta(colunasAtualizadas)){
+            const metadeDoVetor = Math.floor(colunasAtualizadas.length / 2);
+            
+            for(let i = 0; i < metadeDoVetor; i++){
+                const novoTamanho = colunasAtualizadas.length;
+                const indiceAleatorio = Math.floor(Math.random() * novoTamanho);
+                colunasAtualizadas = colunasAtualizadas.filter((_, index) => index !== indiceAleatorio);
+            }
+            setColunas([...colunasAtualizadas])
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+        tudoCorreto()
     }
 
     return(
@@ -240,7 +254,7 @@ function TabelaDados(){
                                     btnRodando={estaRodando}
                         />
                         <BtnPequeno btnId={Styles.btnPause}
-                                    btnFuncao={() => mergeSort()}
+                                    btnFuncao={() => thanosSort()}
                                     btnImagem={estaRodando === true ? pauseImg : playImg} 
                                     btnAlt={"Velocidade 2"}
                                     btnRodando={estaRodando}
