@@ -278,22 +278,22 @@ function TabelaDados({algoritmoUsado}){
             await new Promise(resolve => setTimeout(resolve, intervaloDeTempoRef.current)); 
         }
 
-        const tamanhoColunas = colunasAtualizadas.length;
-
-        for(let i = 0; i < tamanhoColunas; i++){
-            let min = i;
-            for(let j = i + 1; j < tamanhoColunas; j++) {
-                if(colunasAtualizadas[j] < colunasAtualizadas[min]) min = j;
-                setColunas([...colunasAtualizadas]);
-                modificarCores(min, j);
-                await new Promise(resolve => setTimeout(resolve, intervaloDeTempoRef.current));
+        for(let j = 1; j < colunasAtualizadas.length; j++){
+            const x = colunasAtualizadas[j];
+            let i = j - 1;
+            
+            while(i >= 0 && colunasAtualizadas[i] > x){
+                let temp = colunasAtualizadas[i + 1]
+                colunasAtualizadas[i + 1] = colunasAtualizadas[i];
+                colunasAtualizadas[i] = temp;
+                setColunas([...colunasAtualizadas]); 
+                modificarCores(i,i + 1);
+                await new Promise(resolve => setTimeout(resolve, intervaloDeTempoRef.current)); 
+                i--;
             }
-            const temp = colunasAtualizadas[i];
-            colunasAtualizadas[i] = colunasAtualizadas[min];
-            colunasAtualizadas[min] = temp;
-            setColunas([...colunasAtualizadas]);
         }
 
+        console.log(colunasAtualizadas)
         modificarCores(-1,-1)
         tudoCorreto()
         setEstaRodando(false)
