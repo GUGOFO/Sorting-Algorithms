@@ -293,7 +293,6 @@ function TabelaDados({algoritmoUsado}){
             }
         }
 
-        console.log(colunasAtualizadas)
         modificarCores(-1,-1)
         tudoCorreto()
         setEstaRodando(false)
