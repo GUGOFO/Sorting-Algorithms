@@ -58,6 +58,9 @@ function TabelaDados({algoritmoUsado}){
             case algoritmoUsado === "Random Sort":
                 randomSort();
                 break;
+            case algoritmoUsado === "Epstein Sort":
+                epsteinSort();
+                break;
             default:
                 console.log("fodeu")
                 break;
@@ -254,6 +257,48 @@ function TabelaDados({algoritmoUsado}){
         setEstaRodando(false)
         tudoCorreto()
     }
+
+    async function epsteinSort() {
+        let colunasAtualizadas = [...colunas];
+        setEstaRodando(true);
+        let indiceNoArrayAtualizado = 0;
+
+        for (let i = 0; i < colunas.length; i++) {
+            const idade = colunas[i];
+
+            if (idade >= 18) {
+                colunasAtualizadas = colunasAtualizadas.filter((_, idx) => idx !== indiceNoArrayAtualizado);
+                modificarCores(-1, indiceNoArrayAtualizado);
+            } 
+            else {
+                indiceNoArrayAtualizado++;
+                modificarCores(indiceNoArrayAtualizado, -1);
+            }
+            setColunas([...colunasAtualizadas]); 
+            await new Promise(resolve => setTimeout(resolve, intervaloDeTempoRef.current)); 
+        }
+
+        for(let j = 1; j < colunasAtualizadas.length; j++){
+            const x = colunasAtualizadas[j];
+            let i = j - 1;
+            
+            while(i >= 0 && colunasAtualizadas[i] > x){
+                let temp = colunasAtualizadas[i + 1]
+                colunasAtualizadas[i + 1] = colunasAtualizadas[i];
+                colunasAtualizadas[i] = temp;
+                setColunas([...colunasAtualizadas]); 
+                modificarCores(i,i + 1);
+                await new Promise(resolve => setTimeout(resolve, intervaloDeTempoRef.current)); 
+                i--;
+            }
+        }
+
+        console.log(colunasAtualizadas)
+        modificarCores(-1,-1)
+        tudoCorreto()
+        setEstaRodando(false)
+    }
+
 
     return(
         <div id={Styles.conjuntoTabela}>
