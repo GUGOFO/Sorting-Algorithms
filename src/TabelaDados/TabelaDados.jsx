@@ -102,29 +102,25 @@ function TabelaDados({algoritmoUsado}){
         tipoVelocidade.current = 2;
     }
 
-    function aleatorizar(indexInicial, indexFinal){
+    async function aleatorizar(indexInicial, indexFinal) {
+        setEstaRodando(true);
         let novoArray = [...colunas];
-        let i = indexInicial;
-        setEstaRodando(true)
 
-        function passo() {
-            if (i < indexFinal) {
-                let j = Math.floor(Math.random() * (indexFinal - i)) + i;
-                let temp = novoArray[i];
-                novoArray[i] = novoArray[j];
-                novoArray[j] = temp;
-                setColunas([...novoArray]);
-                modificarCores(i, j);
-                i++;
-                setTimeout(passo, intervaloDeTempoRef.current);
-                console.log(intervaloDeTempoRef.current)
-            }
-            else {
-                modificarCores(-1, -1);
-                setEstaRodando(false)
-            }
+        for (let i = indexInicial; i < indexFinal; i++) {
+            let j = Math.floor(Math.random() * (indexFinal - i)) + i;
+            
+            let temp = novoArray[i];
+            novoArray[i] = novoArray[j];
+            novoArray[j] = temp;
+
+            setColunas([...novoArray]);
+            modificarCores(i, j);
+
+            await new Promise(resolve => setTimeout(resolve, intervaloDeTempoRef.current));
         }
-        passo();
+
+        modificarCores(-1, -1);
+        setEstaRodando(false);
     }
 
     async function tudoCorreto(){
