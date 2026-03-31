@@ -17,6 +17,7 @@ function TabelaDados({algoritmoUsado}){
     const [idCorVerde, setIdCorVerde] = useState(-1)
     const [idCorVermelho, setIdCorVermelho] = useState(-1)
     const intervaloDeTempoRef = useRef((15/colunas.length) * 100);
+    const tipoVelocidade = useRef(1);
 
     const ColunaItem = React.memo(({ coluna, maxColunas, cor }) => {
         return (
@@ -39,6 +40,24 @@ function TabelaDados({algoritmoUsado}){
         const numDeColunas = Number(e.target.value);
         const novoArray = Array.from({ length: numDeColunas }, (_, i) => i + 1);
         setColunas(novoArray);
+
+        switch(tipoVelocidade.current){
+            case 0:
+                intervaloDeTempoRef.current = (90/numDeColunas) * 100; 
+                console.log("Velocidade 0")
+                console.log(intervaloDeTempoRef.current)
+                break;
+            case 1:
+                intervaloDeTempoRef.current = (15/numDeColunas) * 100; 
+                console.log("Velocidade 1")
+                console.log(intervaloDeTempoRef.current)
+                break;
+            default:
+                intervaloDeTempoRef.current = (2/numDeColunas) * 100; 
+                console.log("Velocidade 2")
+                console.log(intervaloDeTempoRef.current)
+                break;
+        }
     }
 
     function rodarSorting(){
@@ -68,18 +87,19 @@ function TabelaDados({algoritmoUsado}){
         console.log(algoritmoUsado)
     }
 
-    //Arrumar o bug de velocidade so mudar quando voce clicar affs
-
     function desacelerar(){
         intervaloDeTempoRef.current = (90/colunas.length) * 100; 
+        tipoVelocidade.current = 0;
+    }
+    
+    function velocidadeMedia(){
+        intervaloDeTempoRef.current = (15/colunas.length) * 100;
+        tipoVelocidade.current = 1;
     }
 
     function acelerar(){
-        intervaloDeTempoRef.current = (2/colunas.length) * 100; 
-    }
-
-    function velocidadeMedia(){
-        intervaloDeTempoRef.current = (15/colunas.length) * 100;
+        intervaloDeTempoRef.current = (2/colunas.length) * 100;
+        tipoVelocidade.current = 2;
     }
 
     function aleatorizar(indexInicial, indexFinal){
@@ -97,6 +117,7 @@ function TabelaDados({algoritmoUsado}){
                 modificarCores(i, j);
                 i++;
                 setTimeout(passo, intervaloDeTempoRef.current);
+                console.log(intervaloDeTempoRef.current)
             }
             else {
                 modificarCores(-1, -1);
