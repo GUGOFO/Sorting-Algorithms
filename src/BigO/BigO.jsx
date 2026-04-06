@@ -16,7 +16,7 @@ function BigO({algoritmoUsado}){
             bigO = ["n log n", "n log n", "n log n"];
             break;
         case "Thanos Sort":
-            bigO = ["∞", "∞", "n"];
+            bigO = ["log n", "log n", "n"];
             break;
         case "Random Sort":
             bigO = ["∞", "n * n!", "n"];
