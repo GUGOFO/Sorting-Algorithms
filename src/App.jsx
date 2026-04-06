@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import TabelaDados from './TabelaDados/TabelaDados'
 import ListaDeOpções from './ListaDeOpções/ListaDeOpções'
+import BigO from './BigO/BigO'
 import './App.css'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <div id="pagina">
         <h1 id='titulo' >{algoritmo}</h1>
         <TabelaDados algoritmoUsado={algoritmo}/>
+        <BigO algoritmoUsado={algoritmo}/>
       </div>
 
     </div>
