@@ -26,7 +26,7 @@ function BigO({algoritmoUsado}){
             break;
         default:
             console.log("fodeu");
-            bigO = ["?", "?", "?"];
+            bigO = ["???", "???", "???"];
             break;
     }
 
